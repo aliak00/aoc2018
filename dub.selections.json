@@ -1,5 +1,12 @@
 {
 	"fileVersion": 1,
 	"versions": {
+		"bolts": "0.8.1",
+		"dateparser": "3.0.0",
+		"ddash": "0.0.6",
+		"emsi_containers": "0.5.3",
+		"optional": "0.7.4",
+		"silly": "0.8.0",
+		"sumtype": "0.6.4"
 	}
 }

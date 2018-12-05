@@ -9,5 +9,9 @@
 	"stringImportPaths": [
 		"data"
 	],
-	"targetPath": "bin"
+	"targetPath": "bin",
+	"dependencies": {
+		"dateparser": "*",
+		"ddash": "*"
+	}
 }

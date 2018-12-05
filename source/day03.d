@@ -9,7 +9,9 @@ struct Claim {
     int height;
     this(string data) {
         import std.regex;
-        auto parts = data.matchAll(regex(`#(\d+) @ (\d+),(\d+): (\d+)x(\d+)`)).front;
+        auto parts = data
+            .matchAll(regex(`#(\d+) @ (\d+),(\d+): (\d+)x(\d+)`))
+            .front;
         id = parts[1].to!int;
         left = parts[2].to!int;
         top = parts[3].to!int;
