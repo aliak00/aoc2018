@@ -2,7 +2,7 @@ module day01;
 import common;
 
 auto solve(string input)() {
-    auto lines = input
+    enum lines = input
         .strip
         .splitter("\n")
         .map!(to!int);
