@@ -11,7 +11,7 @@ auto reactsTo(int a, int b) {
 alias react = (string data) {
     return data.fold!((m, a) {
         if (!m.empty && m.back.reactsTo(a)) {
-            return m[0 .. $-1];
+            return m.dropBack(1);
         } else {
             return m ~ a.to!string;
         }
