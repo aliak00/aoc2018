@@ -1,27 +1,24 @@
 module day01;
 import common;
 
-auto process(string data)() {
-    return data
+auto solve(string input)() {
+    auto lines = input
         .strip
         .splitter("\n")
         .map!(to!int);
-}
 
-template solveA(string data) {
-    enum solveA = process!data.sum;
-}
+    auto A = lines.sum;
 
-template solveB(string data) {
-    auto solveB() {
-        bool[int] set;
-        int sum = 0;
-        foreach (i; process!data.cycle) {
-            sum += i;
-            if (sum in set) {
-                return sum;
-            }
-            set[sum] = true;
-        }
-    }
+    bool[int] set;
+    auto B = lines
+        .cycle
+        .cumulativeFold!"a + b"
+        .tee!(a => set[a] = true)
+        .filter!(a => a in set)
+        .front;
+
+    return tuple(
+        A,
+        B,
+    );
 }
