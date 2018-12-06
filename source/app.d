@@ -1,7 +1,7 @@
 import std.stdio: writeln;
 import std.format;
 
-enum day = 3;
+enum day = 4;
 
 immutable input = import(day.format!"%02d.txt");
 
