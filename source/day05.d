@@ -1,16 +1,11 @@
 module day05;
 import common;
 
-import std.math: abs;
-import std.conv: to;
-
-auto reactsTo(int a, int b) {
-    return (a - b).abs == 32;
-}
-
-alias react = (string data) {
+auto react(string data) {
+    import std.math: abs;
+    import std.conv: to;
     return data.fold!((m, a) {
-        if (!m.empty && m.back.reactsTo(a)) {
+        if (!m.empty && (cast(int)m.back - cast(int)a).abs == 32) {
             return m.dropBack(1);
         } else {
             return m ~ a.to!string;
@@ -18,21 +13,22 @@ alias react = (string data) {
     })(data[0..0]);
 };
 
-template solveA(string data) {
-    auto solveA() {
-        return data.react.length;
-    }
-}
+auto solve(string input)() {
+    auto A = input
+        .react
+        .length;
 
-template solveB(string data) {
-    auto solveB() {
-        return 'a'.iota('z')
-            .map!(l => data
-                .filter!(a => a != l && a != (l - 32))
-                .to!string
-                .react
-                .length
-            )
-            .fold!min;
-    }
+    auto B = 'a'.iota('z')
+        .map!(l => input
+            .filter!(a => a != l && a != (l - 32))
+            .to!string
+            .react
+            .length
+        )
+        .fold!min;
+
+    return tuple(
+        A,
+        B,
+    );
 }
