@@ -8,21 +8,31 @@ auto reactsTo(int a, int b) {
     return (a - b).abs == 32;
 }
 
+alias react = (string data) {
+    return data.fold!((m, a) {
+        if (!m.empty && m.back.reactsTo(a)) {
+            return m[0 .. $-1];
+        } else {
+            return m ~ a.to!string;
+        }
+    })(data[0..0]);
+};
+
 template solveA(string data) {
     auto solveA() {
-        auto a = data.fold!((m, a) {
-            m ~= a.to!string;
-            if (m.length > 1 && m[$-1].reactsTo(m[$-2])) {
-                return m[0 .. $-2];
-            } 
-            return m;
-        })("");
-        return a.length;
+        return data.react.length;
     }
 }
 
 template solveB(string data) {
     auto solveB() {
-        return "b";
+        return 'a'.iota('z')
+            .map!(l => data
+                .filter!(a => a != l && a != (l - 32))
+                .to!string
+                .react
+                .length
+            )
+            .fold!min;
     }
 }
