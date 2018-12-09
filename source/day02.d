@@ -18,15 +18,10 @@ string pluckCommon(string[] pair) {
 }
 
 auto solve(string input)() {
-    enum lines = input
-        .strip
-        .splitter("\n")
-        .array;
-
     int sum2s = 0;
     int sum3s = 0;
 
-    foreach (line; lines.map!(a => a.array.sort)) {
+    foreach (line; byLine!input.map!(a => a.array.sort)) {
         auto counts = line.group.map!"a[1]";
         if (counts.canFind!"a == 3") {
             sum3s++;
@@ -38,7 +33,7 @@ auto solve(string input)() {
 
     auto A = sum2s * sum3s;
 
-    auto B = lines
+    auto B = byLine!input
         .sort
         .slide(2)
         .filter!(pair => pair[0].differsInOnePlace(pair[1]))

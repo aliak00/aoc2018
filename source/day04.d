@@ -82,12 +82,7 @@ struct Guard {
 }
 
 Guard[int] parseGuards(string data)() {
-    auto lines = data
-        .strip
-        .splitter("\n")
-        .array;
-
-    auto rows = lines
+    auto rows = byLine!data
         .map!parse
         .array
         .sort!((a, b) => a.time < b.time)

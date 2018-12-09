@@ -2,15 +2,13 @@ module day01;
 import common;
 
 auto solve(string input)() {
-    enum lines = input
-        .strip
-        .splitter("\n")
+    enum ints = byLine!input
         .map!(to!int);
 
-    auto A = lines.sum;
+    auto A = ints.sum;
 
     bool[int] set;
-    auto B = lines
+    auto B = ints
         .cycle
         .cumulativeFold!"a + b"
         .tee!(a => set[a] = true)

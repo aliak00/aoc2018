@@ -26,11 +26,7 @@ struct Data {
 }
 
 auto solve(string input)() {
-
-    enum claims = input
-        .strip
-        .splitter("\n")
-        .array
+    enum claims = byLine!input
         .map!(s => Claim(s));
 
     int[string] frequencyGrid;

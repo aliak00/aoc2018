@@ -8,3 +8,10 @@ public {
     import std.stdio;
     import std.typecons;
 }
+
+auto byLine(string input)() {
+    return input
+        .strip
+        .splitter("\n")
+        .array;
+}
